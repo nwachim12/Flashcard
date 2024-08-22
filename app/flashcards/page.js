@@ -4,6 +4,12 @@ import { useEffect, useState } from 'react';
 import { collection, doc, getDoc, setDoc } from 'firebase/firestore';
 import { db } from '../lib/firebase'; // Correctly import your db
 import { useRouter } from 'next/navigation';
+import Container from '@mui/material/Container'; // Import Container
+import Grid from '@mui/material/Grid'; // Import Grid
+import Card from '@mui/material/Card'; // Import Card
+import CardActionArea from '@mui/material/CardActionArea'; // Import CardActionArea
+import CardContent from '@mui/material/CardContent'; // Import CardContent
+import Typography from '@mui/material/Typography'; // Import Typography
 
 export default function Flashcard() {
   const { isLoaded, isSignedIn, user } = useUser();

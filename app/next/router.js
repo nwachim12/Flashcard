@@ -1,6 +1,16 @@
 import { useRouter } from 'next/router';
 
-const router = useRouter();
+const MyComponent = () => {
+    const router = useRouter();
 
-// After successful sign-up
-router.push('/dashboard');
+    // After successful sign-up
+    const handleSignUp = () => {
+        router.push('/dashboard');
+    };
+
+    return (
+        <button onClick={handleSignUp}>Sign Up</button>
+    );
+};
+
+export default MyComponent;

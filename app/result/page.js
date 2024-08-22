@@ -1,10 +1,9 @@
 'use client';
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import getStripe from '/app/utils/get-stripe.js';
-import { useSearchParams } from "next/navigation";
-import { CircularProgress, Typography, Container, Box } from "@mui/material";
-import { SignedIn, SignedOut } from '@clerk/clerk-react';
+import { CircularProgress, Typography, Container, Box } from '@mui/material';
+import { SignedIn, SignedOut } from '@clerk/nextjs'; // Adjust import to @clerk/nextjs
 
 const ResultPage = () => {
     const searchParams = useSearchParams();
@@ -66,37 +65,39 @@ const ResultPage = () => {
     }
 
     return (
-        <><SignedIn>
-            <Container
-                maxWidth="sm"
-                sx={{
-                    textAlign: 'center',
-                    mt: 4,
-                }}
-            >
-                {session.payment_status === 'paid' ? (
-                    <>
-                        <Typography variant="h4">Thank you for your purchase</Typography>
-                        <Box sx={{ mt: 2 }}>
-                            <Typography variant="h6">Session ID: {session_id}</Typography>
-                            <Typography variant="body1">
-                                We have received your payment. You will receive an order detailed email.
-                            </Typography>
-                        </Box>
-                    </>
-                ) : (
-                    <>
-                        <Typography variant="h4">Payment Failed</Typography>
-                        <Box sx={{ mt: 2 }}>
-                            <Typography variant="h6">Session ID: {session_id}</Typography>
-                            <Typography variant="body1">
-                                We haven't received your payment. Please try again.
-                            </Typography>
-                        </Box>
-                    </>
-                )}
-            </Container>
-        </SignedIn><SignedOut>
+        <>
+            <SignedIn>
+                <Container
+                    maxWidth="sm"
+                    sx={{
+                        textAlign: 'center',
+                        mt: 4,
+                    }}
+                >
+                    {session.payment_status === 'paid' ? (
+                        <>
+                            <Typography variant="h4">Thank you for your purchase</Typography>
+                            <Box sx={{ mt: 2 }}>
+                                <Typography variant="h6">Session ID: {session_id}</Typography>
+                                <Typography variant="body1">
+                                    We have received your payment. You will receive an order detailed email.
+                                </Typography>
+                            </Box>
+                        </>
+                    ) : (
+                        <>
+                            <Typography variant="h4">Payment Failed</Typography>
+                            <Box sx={{ mt: 2 }}>
+                                <Typography variant="h6">Session ID: {session_id}</Typography>
+                                <Typography variant="body1">
+                                    We haven't received your payment. Please try again.
+                                </Typography>
+                            </Box>
+                        </>
+                    )}
+                </Container>
+            </SignedIn>
+            <SignedOut>
                 <Container
                     maxWidth="sm"
                     sx={{
@@ -106,7 +107,8 @@ const ResultPage = () => {
                 >
                     <Typography variant="h6">Please sign in to view this page.</Typography>
                 </Container>
-            </SignedOut></>
+            </SignedOut>
+        </>
     );
 };
 
