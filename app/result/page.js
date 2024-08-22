@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import getStripe from '/app/utils/get-stripe.js';
 import { CircularProgress, Typography, Container, Box } from '@mui/material';
-import { SignedIn, SignedOut } from '@clerk/nextjs'; // Adjust import to @clerk/nextjs
+import { SignedIn, SignedOut } from '@clerk/nextjs'; // Ensure correct import
 
 const ResultPage = () => {
     const searchParams = useSearchParams();
@@ -90,7 +90,7 @@ const ResultPage = () => {
                             <Box sx={{ mt: 2 }}>
                                 <Typography variant="h6">Session ID: {session_id}</Typography>
                                 <Typography variant="body1">
-                                    We haven't received your payment. Please try again.
+                                    We haven&apos;t received your payment. Please try again.
                                 </Typography>
                             </Box>
                         </>
