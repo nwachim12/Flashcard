@@ -4,7 +4,6 @@ import "./globals.css";
 
 // Fetch environment variables
 const clerkFrontendApi = process.env.NEXT_PUBLIC_CLERK_FRONTEND_API;
-const clerkApiKey = process.env.CLERK_API_KEY;
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,10 +14,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider
-      frontendApi={clerkFrontendApi}
-      apiKey={clerkApiKey}
-    >
+    <ClerkProvider frontendApi={clerkFrontendApi}>
       <html lang="en">
         <body className={inter.className}>{children}</body>
       </html>
