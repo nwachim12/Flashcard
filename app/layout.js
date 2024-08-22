@@ -2,6 +2,10 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
+// Fetch environment variables
+const clerkFrontendApi = process.env.NEXT_PUBLIC_CLERK_FRONTEND_API;
+const clerkApiKey = process.env.CLERK_API_KEY;
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -11,7 +15,10 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      frontendApi={clerkFrontendApi}
+      apiKey={clerkApiKey}
+    >
       <html lang="en">
         <body className={inter.className}>{children}</body>
       </html>
