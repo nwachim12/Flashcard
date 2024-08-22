@@ -1,4 +1,4 @@
-"use client";
+'use client'; // This directive ensures that the file is treated as a client component
 
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
@@ -15,9 +15,9 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { signIn } from 'next-auth/react';  // Import signIn function
-import GoogleIcon from '@mui/icons-material/Google';  // Google icon
-import GitHubIcon from '@mui/icons-material/GitHub';  // GitHub icon
+import { signInWithPopup } from 'firebase/auth';
+import { auth, googleAuthProvider } from '../lib/firebase'; // Ensure this import is not duplicated
+import GoogleIcon from '@mui/icons-material/Google';
 
 function Copyright(props) {
   return (
@@ -42,6 +42,23 @@ export default function SignIn() {
       email: data.get('email'),
       password: data.get('password'),
     });
+  };
+
+  const handleSignIn = (provider) => {
+    let authProvider;
+
+    if (provider === 'google') {
+      authProvider = googleAuthProvider;
+    } 
+
+    signInWithPopup(auth, authProvider)
+      .then((result) => {
+        // Handle successful sign-in
+        console.log('Signed in as:', result.user);
+      })
+      .catch((error) => {
+        console.error('Sign-in error:', error);
+      });
   };
 
   return (
@@ -96,31 +113,19 @@ export default function SignIn() {
               Sign In
             </Button>
             
-            {/* OR Separator */}
             <Typography variant="body2" align="center" sx={{ mt: 2, mb: 2 }}>
               OR
             </Typography>
             
-            {/* OAuth Buttons with Icons */}
             <Button
               fullWidth
               variant="outlined"
               sx={{ mb: 2, display: 'flex', alignItems: 'center' }}
-              onClick={() => signIn('google')}
+              onClick={() => handleSignIn('google')}
             >
               <GoogleIcon sx={{ mr: 1 }} />
               Sign in with Google
             </Button>
-            <Button
-              fullWidth
-              variant="outlined"
-              sx={{ display: 'flex', alignItems: 'center' }}
-              onClick={() => signIn('github')}
-            >
-              <GitHubIcon sx={{ mr: 1 }} />
-              Sign in with GitHub
-            </Button>
-
             <Grid container>
               <Grid item xs>
                 <NextLink href="/forgot-password" passHref>
@@ -142,3 +147,4 @@ export default function SignIn() {
     </ThemeProvider>
   );
 }
+

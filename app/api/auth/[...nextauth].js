@@ -1,3 +1,5 @@
+// /pages/api/auth/[...nextauth].js
+
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import GitHubProvider from 'next-auth/providers/github';
@@ -13,4 +15,7 @@ export default NextAuth({
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
     }),
   ],
+  pages: {
+    error: '/auth/error', // Custom error page URL
+  },
 });

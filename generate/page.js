@@ -4,7 +4,7 @@ import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { writeBatch, doc, collection, getDoc, setDoc } from 'firebase/firestore';
-import { db } from '../firebase';  // Adjust this import based on your actual firebase config location
+import { db } from '../app/lib/firebase';  // Adjust this import based on your actual firebase config location
 import {
   Container,
   Box,
