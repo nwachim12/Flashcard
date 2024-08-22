@@ -2,7 +2,7 @@
 import { useUser } from '@clerk/nextjs';
 import { useEffect, useState } from 'react';
 import { collection, doc, getDoc, setDoc } from 'firebase/firestore';
-import { db } from 'firebase';
+import { db } from '../firebaseConfig'; // Correctly import your db
 import { useRouter } from 'next/navigation';
 
 export default function Flashcard() {

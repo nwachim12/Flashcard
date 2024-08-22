@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider} from "firebase/auth";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 
 // Your web app's Firebase configuration
@@ -17,6 +18,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const googleAuthProvider = new GoogleAuthProvider();
+const db = getFirestore(app); // Initialize Firestore
 const analytics = typeof window !== 'undefined' ? getAnalytics(app) : null; // Avoid initialization in server-side
 
-export { app, auth, googleAuthProvider};
+export { app, auth, googleAuthProvider, db }; // Export the db object
